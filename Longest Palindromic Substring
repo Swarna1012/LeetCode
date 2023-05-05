@@ -1,0 +1,63 @@
+#include<stdio.h>
+#include<string.h>
+int main()
+{
+    char original[]="jkollokabjoj";
+    int n=sizeof(original)/sizeof(original[0]);
+    int m=n*2;
+    char new[m];
+
+    int j=0;
+    for(int i=0;i<n;i++)
+    {
+        new[j]='_';
+        new[++j]=original[i];
+        j=j+1;
+    }
+
+    for(int i=0;i<m;i++)
+    {
+        printf("%c",new[i]);
+    }printf("\n");
+
+    int arr[m];
+    arr[0]=0;
+    int k=1;
+    int count=0;
+    for(int i=1;i<m;i++)
+    {
+
+        while(new[i-k]==new[i+k])
+        {
+            count++;
+            k++;
+        }
+        arr[i]=count;
+        count=0;
+        k=1;
+    }
+
+    for(int i=0;i<m;i++)
+    {
+        printf("%d",arr[i]);
+    }
+
+    int max=arr[0];
+    for(int i=1;i<m;i++)
+    {
+        if(max<arr[i])
+        {
+            max=i;
+        }
+    }
+    printf("\n%d index %d",arr[max],max);
+    printf("\n");
+
+    for(int i=max-arr[max]; i<max+arr[max]; i++)
+    {
+        if(new[i]!='_')
+        {
+            printf("%c",new[i]);
+        }
+    }
+}
